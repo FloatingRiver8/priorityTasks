@@ -1,0 +1,285 @@
+body {
+
+    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#main__addTaskAndList {
+    display: flex;
+    /*   align-items: center; */
+    flex-direction: column;
+    /*  justify-content: center; */
+    /*  align-content: center; */
+
+    border-radius: 50px;
+    background: linear-gradient(145deg, #EFEFBB, #D4D3DD);
+    box-shadow: 20px 20px 60px #cfc4ab,
+        -20px -20px 60px #ffffe7;
+    width: 35rem;
+    margin-top: 3rem;
+    text-align: center;
+    font-family: 'Baumans', cursive;
+    color: rgba(148, 144, 130, 0.995);
+    margin-bottom: 2rem;
+
+}
+
+.main__section--questions {
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+
+}
+
+.main__section--questions div {
+    padding: 1rem;
+}
+
+.div__h1--container {
+    font-size: 2rem;
+    padding-top: 3rem;
+
+}
+
+.div__h3--container {
+    font-size: 2rem;
+    padding: 2rem;
+
+}
+
+h1,
+h2,
+h3,
+h4 {
+
+    color: #fffbfb;
+    text-shadow: 0 1px 0 #CCCCCC, 0 2px 0 #c9c9c9, 0 3px 0 #bbb,
+        0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, .1), 0 0 5px rgba(0, 0, 0, .1), 0 1px 3px rgba(0, 0, 0, .3),
+        0 3px 5px rgba(0, 0, 0, .2), 0 5px 10px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .2),
+        0 20px 20px rgba(0, 0, 0, .15);
+    padding: 0.5rem;
+}
+
+
+
+/* Ingreso de tarea en INPUT */
+.input-enterTask {
+
+    text-align: center;
+    margin: 3rem auto 1.5rem auto;
+    padding: 1.2rem 5rem;
+    color: rgb(121, 105, 111);
+
+    background-color: rgb(232, 229, 187);
+    border-style: none;
+    border-radius: 5px;
+    background: #fcedcd;
+    box-shadow: -20px 20px 30px #cfc4ab,
+        20px -20px 40px #ffffe7;
+}
+
+.input-enterTask::placeholder {
+    color: rgb(185, 185, 183);
+
+}
+
+.input-enterTask:hover {
+    background-color: rgba(242, 192, 107, 0.678);
+    color: rgb(118, 145, 57);
+}
+
+
+
+/* Estilos del SELECT */
+.myPriorityLevels,
+.myEisenhowerChoices {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+
+    margin: 2rem auto 0.5rem;
+    padding: 0.7rem;
+
+    background-color: rgb(215, 244, 247);
+    color: rgba(148, 144, 130, 0.995);
+
+    border-style: none;
+    border-radius: 10px;
+    background: #fcedcd;
+    box-shadow: -20px 20px 30px #cfc4ab,
+        20px -20px 40px #ffffe7;
+
+}
+
+.myPriorityLevels,
+.myEisenhowerChoices,
+.input-enterTask:focus {
+    outline: none;
+}
+
+
+
+
+/* Botón ENVIAR tarea */
+#sending {
+    align-self: center;
+    color: rgb(145, 145, 144);
+    margin-top: 5rem;
+    margin-right: 1.5rem;
+    padding: 1.2rem 3rem;
+    border-style: none;
+    border-radius: 50px;
+    background: linear-gradient(145deg, #EFEFBB, #D4D3DD);
+    box-shadow: -20px 20px 30px #cfc4ab,
+        20px -20px 40px #ffffe7;
+
+    margin-top: 2rem;
+
+}
+
+#sending:hover {
+    background: rgba(210, 238, 134, 0.534);
+
+}
+
+
+/* Botón ORDENAR */
+
+#btn__sortList {
+    justify-content: center;
+    margin-top: 5rem;
+    margin-left: 1.5rem;
+    border-style: none;
+    border-radius: 50px;
+    background: linear-gradient(145deg, #EFEFBB, #D4D3DD);
+    box-shadow: -20px 20px 30px #cfc4ab,
+        20px -20px 40px #ffffe7;
+    color: rgba(148, 144, 130, 0.995);
+
+    padding: 1.2rem 2.5rem;
+
+
+
+}
+
+#btn__sortList:hover {
+    background: rgb(215, 244, 247);
+}
+
+
+.myOrderedTask {
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+
+
+ol {
+
+    color: rgba(148, 144, 130, 0.995);
+}
+
+ol li {
+    color: #9b8b8b;
+    text-align: center;
+    font-size: 1rem;
+    padding: 0.5rem;
+
+}
+
+ol li:first-child {
+    font-size: 1.4rem;
+    color: #61a4e2;
+}
+
+ol li:nth-child(2) {
+    font-size: 1.2rem;
+    color: rgb(149, 204, 240);
+}
+
+ol li:nth-child(3) {
+    font-size: 1.1rem;
+    color: rgb(176, 220, 237);
+}
+
+
+
+
+
+
+/* Section Eisenhower */
+#einsSection {
+    /* background-color: #d7f2d7; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+}
+
+
+
+#backgroundTaskList0 {
+    margin-top: 2rem;
+    background-color: rgb(177, 225, 248);
+    width: 100%;
+
+}
+
+#backgroundTaskList1 {
+    width: 45%;
+    border-radius: 5px;
+    font-size: 0.5rem;
+    margin-top: 2rem;
+    background: rgba(0, 255, 221, 0.413);
+
+    background: linear-gradient(225deg, #ccdd48, #eefa90);
+    box-shadow: -19px 19px 38px #c4ca91,
+        19px -19px 38px #ffffc4;
+    padding-bottom: 2rem;
+}
+
+#backgroundTaskList2 {
+    border-radius: 5px;
+    margin-top: 2rem;
+    width: 45%;
+
+    background: linear-gradient(225deg, #deda6ccd, #ffff80a5);
+    box-shadow: -19px 19px 38px #cdca64c1,
+        19px -19px 38px #ffff8cb1;
+    padding-bottom: 2rem;
+}
+
+#backgroundTaskList3 {
+    border-radius: 5px;
+    margin-top: 2rem;
+    width: 45%;
+    background: linear-gradient(225deg, #decd6ccd, #ffdd80a5);
+    box-shadow: -19px 19px 38px #cdb164c1,
+        19px -19px 38px #ffff8cb1;
+    padding-bottom: 2rem;
+}
+
+#backgroundTaskList4 {
+    background-color: #c467e2;
+    border-radius: 5px;
+    margin-top: 2rem;
+    width: 45%;
+    background: linear-gradient(225deg, #cc90f3cd, #d77ff1a5);
+    box-shadow: -19px 19px 38px #9e64cd41,
+        19px -19px 38px #c898f05d;
+    padding-bottom: 2rem;
+}
+
+.einsTitles {
+    font-size: 1.5rem;
+    padding-right: 0.5rem;
+
+}
