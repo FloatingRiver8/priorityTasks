@@ -14,7 +14,7 @@ let ordList4;
 
 
 /* Escondo y hago aparecer los h1 y h3 */
-$("h1, h3").hide();
+/* $("h1, h3").hide();
 
 $("h1").fadeIn(2000, function () {
     $("h3").slideDown(500)
@@ -23,8 +23,8 @@ $("h1").fadeIn(2000, function () {
             "font-size": "3.5rem"
         })
 });
-
-/* Obtendo los inputs y botones del dom */
+ */
+/* Obtengo los inputs y botones del dom */
 const mainTaskList = $("#main__addTaskAndList");
 
 
@@ -39,22 +39,29 @@ class Tasks {
 }
 
 
+
+
+//---------------------------------------------------------
+
+
+
+//---------------------------------------------------------
 /* Creo el Form con input para ingreso de tareas y botón input para submit. Append al main */
 mainTaskList.append(`<form id = "my-Form">
 <input type="text" placeholder="Ingresa tu tarea aquí" class="input-enterTask">
 <select class = "myPriorityLevels"> </select>
 <select class = "myEisenhowerChoices"></select>
-<input type ="submit" id="sending">
 <button type= "button" id="btn__sortList">Ordenar</button>
 </form>`);
 const myForm = document.getElementById("my-Form");
 
-
+//---------------------------------------------------------
 
 /*  Obtengo entradas de INPUTS y SELECT */
 obtainTaskName = document.querySelector(".input-enterTask");
 obtainEachPriority = document.querySelector(".myPriorityLevels");
 obtainEachEisenhower = document.querySelector(".myEisenhowerChoices");
+let obtainBtnDelete = document.querySelector("#btn_delete1")
 /* Obtengo Botón ordenar */
 const btnSort = document.getElementById("btn__sortList");
 
@@ -99,20 +106,11 @@ obtainEachEisenhower.addEventListener("change", (e) => {
 })
 
 
-/* Creo la INSTANCIA del objeto TASKS con los ingresos */
-myForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    containerTasks.push(new Tasks(taskName, priorityLevelForTask, priorityEisenhowerForTask));
-    console.log(containerTasks);
-    obtainTaskName.value = "";
-
-})
-
 
 let divEisen = document.querySelector("#backgroundTaskList1");
-
-
 let sqareDiv
+
+//---------------------------------------------------------
 /* CREO SECCIÓN para los "POST-IT" de Eisenhower" */
 einsSection = document.createElement("section");
 einsSection.setAttribute('id', 'einsSection')
@@ -139,19 +137,25 @@ for (let [index, eachEisen] of eisenhowerChoices.entries()) {
 
 }
 
-
+//---------------------------------------------------------
 
 /* ANIMACIÓN Inicio sin los h2 de los "post-it" */
 $("h2").fadeOut();
-
+//---------------------------------------------------------
 
 /* **BOTÓN ORDENAR evento**
  Ordena las tareas por orden de prioridad */
-btnSort.addEventListener("click", () => {
+btnSort.addEventListener("click", (e) => {
+
+            /* Creo la instancia del objeto Task y borro el input  */
+            containerTasks.push(new Tasks(taskName, priorityLevelForTask, priorityEisenhowerForTask));
+            obtainTaskName.value = "";
 
 
+
+            //---------------------------------------------------------    
             /* ORDENO las tareas dependiendo del PRIORITYNUMBER donde 10 va primero que 1 */
-            for (let i = 1; i <= containerTasks.length; i++) {
+            for (let i = 1; i <= containerTasks.length; i += 1) {
 
                 if (i == containerTasks.length) {
                     containerTasks.sort(function (a, b) {
@@ -164,17 +168,20 @@ btnSort.addEventListener("click", () => {
                     })
                 }
             }
-
+            //---------------------------------------------------------
 
 
             /* Una vez click en ordenar, APARECEN los TÍTULOS de los POST-IT */
 
-            $("h2").fadeIn("slow")
-                .slideDown(2000);
+            /*     $("h2").fadeIn("slow")
+                    .slideDown(2000);
+             */
 
+            //---------------------------------------------------------            
             /* FILTRA los resultados de las tareas que contengan "Importante/No urgente" */
             filtered1 = containerTasks.filter(function (element) {
                 return element.priorityEisenhower == "Importante/Urgente";
+
             });
 
 
@@ -192,10 +199,7 @@ btnSort.addEventListener("click", () => {
 
             });
 
-
-
-
-
+            //---------------------------------------------------------
 
             /* Vaciar las listas para que no se repitan los items añadidos anteriormente */
             document.querySelector('#taskItems1').innerHTML = " ";
@@ -207,20 +211,57 @@ btnSort.addEventListener("click", () => {
 
             function filtering(f1, f2, f3, f4) {
 
+
                 for (let filter1 of f1) {
 
                     let divEisen = document.querySelector("#backgroundTaskList1");
-                    console.log(ordList1 = document.querySelector(`#taskItems1`))
+                    ordList1 = document.querySelector(`#taskItems1`)
                     itemList1 = document.createElement("li");
+                    itemList1.setAttribute("id", `${filter1.name}`)
+                    /* Botón Delete */
+                    let btnDelete = document.createElement("button");
+                    btnDelete.setAttribute("class", "btn_delete1")
+                    btnDelete.setAttribute("id", `${filter1.name}`)
+
 
                     divEisen.append(ordList1);
                     ordList1.append(itemList1);
+                    ordList1.append(btnDelete);
                     itemList1.innerHTML = ` ${filter1.name},
-                        NP: ${filter1.priorityNumber}, I/U`;
+                NP: ${filter1.priorityNumber}, I/U`;
+                    btnDelete.innerHTML = "borrar";
 
+
+                    /* clicks en lista */
+                    divEisen.addEventListener("click", (e) => {
+
+
+                        if (e.target && e.target.classList.contains("btn_delete1")) {
+                            const mY = e.target.id
+                            removeItem(mY);
+                            /* console.log(mY) */
+
+                            let eachliId = document.getElementById(`${filter1.name}`)
+                            /* console.log(eachliId.id) */
+
+                            /* Si el id del LI coincide con el id del botón, borrar el item list y su botón. */
+                            if (eachliId.id == e.target.id && btnDelete.id == e.target.id) {
+
+                                eachliId.remove(eachliId.id);
+                                btnDelete.remove(btnDelete.id);
+                                console.log("borrado");
+                                console.log(containerTasks)
+                            }
+
+
+                        }
+
+
+                    })
+
+                    console.log(containerTasks)
 
                 }
-
 
 
                 for (let filter2 of f2) {
@@ -228,13 +269,46 @@ btnSort.addEventListener("click", () => {
                     let divEisen2 = document.querySelector("#backgroundTaskList2");
                     console.log(ordList2 = document.querySelector(`#taskItems2`))
                     itemList2 = document.createElement("li");
+                    itemList2.setAttribute("id", `${filter2.name}`)
+
+                    /* Botón Delete */
+                    let btnDelete2 = document.createElement("button");
+                    btnDelete2.setAttribute("class", "btn_delete2")
+                    btnDelete2.setAttribute("id", `${filter2.name}`)
 
                     divEisen2.appendChild(ordList2)
                     ordList2.appendChild(itemList2);
+                    ordList2.append(btnDelete2);
 
                     itemList2.innerHTML = ` ${filter2.name},
-                    NP: ${filter2.priorityNumber}, I/NU`;
+                NP: ${filter2.priorityNumber}, I/U`;
+                    btnDelete2.innerHTML = "borrar";
 
+                    /* clicks en lista */
+                    divEisen2.addEventListener("click", (e) => {
+
+
+                        if (e.target && e.target.classList.contains("btn_delete2")) {
+                            const mY2 = e.target.id
+                            removeItem(mY2);
+                            let eachliId2 = document.getElementById(`${filter2.name}`)
+                            /* console.log(eachliId.id) */
+
+                            /* Si el id del LI coincide con el id del botón, BORRARR ITEM LIST Y SU BOTÓN. */
+                            if (eachliId2.id == e.target.id && btnDelete2.id == e.target.id) {
+
+                                eachliId2.remove(eachliId2.id);
+                                btnDelete2.remove(btnDelete2.id);
+                                console.log("borrado");
+                                console.log(containerTasks)
+                            }
+
+
+                        }
+
+
+
+                    })
                 }
 
 
@@ -243,35 +317,138 @@ btnSort.addEventListener("click", () => {
                     let divEisen3 = document.querySelector("#backgroundTaskList3");
                     console.log(ordList3 = document.querySelector(`#taskItems3`))
                     itemList3 = document.createElement("li");
+                    itemList3.setAttribute("id", `${filter3.name}`)
 
-                    divEisen3.appendChild(ordList3)
-                    ordList3.appendChild(itemList3);
+                    /* Botón Delete */
+                    let btnDelete3 = document.createElement("button");
+                    btnDelete3.setAttribute("class", "btn_delete3")
+                    btnDelete3.setAttribute("id", `${filter3.name}`)
 
-                    itemList3.innerHTML = `${filter3.name},
-                    NP: ${filter3.priorityNumber}  I/NU`;
+
+                    divEisen3.append(ordList3);
+                    ordList3.append(itemList3);
+                    ordList3.append(btnDelete3);
+                    itemList3.innerHTML = ` ${filter3.name},
+                 NP: ${filter3.priorityNumber}, I/U`;
+                    btnDelete3.innerHTML = "borrar";
+
+                    /* clicks en lista */
+                    divEisen3.addEventListener("click", (e) => {
+
+
+                        if (e.target && e.target.classList.contains("btn_delete3")) {
+                            const mY3 = e.target.id
+                            removeItem(mY3);
+                            /* console.log(mY) */
+
+                            let eachliId3 = document.getElementById(`${filter3.name}`)
+                            /* console.log(eachliId.id) */
+
+                            /* Si el id del LI coincide con el id del botón, borrar el item list y su botón. */
+                            if (eachliId3.id == e.target.id && btnDelete3.id == e.target.id) {
+
+                                eachliId3.remove(eachliId3.id);
+                                btnDelete3.remove(btnDelete3.id);
+                                console.log("borrado");
+                                console.log(containerTasks)
+                            }
+
+
+                        }
+
+
+                    })
+
+
+
 
                 }
 
 
                 for (let filter4 of f4) {
-
                     let divEisen4 = document.querySelector("#backgroundTaskList4");
-                    console.log(ordList4 = document.querySelector(`#taskItems4`))
+                    ordList4 = document.querySelector(`#taskItems4`)
                     itemList4 = document.createElement("li");
-
-                    divEisen4.appendChild(ordList4)
-                    ordList4.appendChild(itemList4);
-
-                    itemList4.innerHTML = `${filter4.name},
-                    NP: ${filter4.priorityNumber}, NI/NU`;
-
-                };
-
-            };
+                    itemList4.setAttribute("id", `${filter4.name}`)
+                    /* Botón Delete */
+                    let btnDelete4 = document.createElement("button");
+                    btnDelete4.setAttribute("class", "btn_delete4")
+                    btnDelete4.setAttribute("id", `${filter4.name}`)
 
 
+                    divEisen4.append(ordList4);
+                    ordList4.append(itemList4);
+                    ordList4.append(btnDelete4);
+                    itemList4.innerHTML = ` ${filter4.name},
+                NP: ${filter4.priorityNumber}, I/U`;
+                    btnDelete4.innerHTML = "borrar";
 
 
-            filtering(filtered1, filtered2, filtered3, filtered4);
+                    /* clicks en lista */
+                    divEisen4.addEventListener("click", (e) => {
 
-            })
+
+                        if (e.target && e.target.classList.contains("btn_delete4")) {
+                            const mY4 = e.target.id
+                            removeItem(mY4);
+                            /* console.log(mY) */
+
+                            let eachliId4 = document.getElementById(`${filter4.name}`)
+                            /* console.log(eachliId.id) */
+
+                            /* Si el id del LI coincide con el id del botón, borrar el item list y su botón. */
+                            if (eachliId4.id == e.target.id && btnDelete4.id == e.target.id) {
+
+                                eachliId4.remove(eachliId4.id);
+                                btnDelete4.remove(btnDelete4.id);
+                                console.log("borrado");
+                                console.log(containerTasks)
+                            }
+
+
+                        }
+
+
+                    })
+
+                }
+
+console.log(containerTasks);
+
+            }
+
+                filtering(filtered1, filtered2, filtered3, filtered4);
+
+
+
+
+
+
+
+
+
+
+
+        //---------------------------------------------------------
+        /* Borrar Item de la lista */
+        function removeItem(myName) {
+            for (let i = 0; i < containerTasks.length; i++) {
+
+                if (containerTasks[i].name == myName) {
+                    console.log(containerTasks[i].name)
+
+                    containerTasks.splice(i, 1);
+                    /*  console.log(containerTasks); */
+                    console.log(myName)
+
+                }
+
+
+
+
+            }
+
+
+
+        }
+    })
