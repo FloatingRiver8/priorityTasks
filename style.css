@@ -8,16 +8,12 @@ body {
 
 #main__addTaskAndList {
     display: flex;
-    /*   align-items: center; */
     flex-direction: column;
-    /*  justify-content: center; */
-    /*  align-content: center; */
-
     border-radius: 50px;
     background: linear-gradient(145deg, #EFEFBB, #D4D3DD);
     box-shadow: 20px 20px 60px #cfc4ab,
         -20px -20px 60px #ffffe7;
-    width: 35rem;
+    width: 54rem;
     margin-top: 3rem;
     text-align: center;
     font-family: 'Baumans', cursive;
@@ -40,13 +36,13 @@ body {
 }
 
 .div__h1--container {
-    font-size: 2rem;
+    font-size: 3rem;
     padding-top: 3rem;
 
 }
 
 .div__h3--container {
-    font-size: 2rem;
+    font-size: 3rem;
     padding: 2rem;
 
 }
@@ -84,11 +80,11 @@ h4 {
 
 .input-enterTask::placeholder {
     color: rgb(185, 185, 183);
-
+    font-size: 1.1rem;
 }
 
 .input-enterTask:hover {
-    background-color: rgba(242, 192, 107, 0.678);
+    background-color: rgb(250, 224, 166);
     color: rgb(118, 145, 57);
 }
 
@@ -101,7 +97,7 @@ h4 {
     flex-direction: row;
     flex-wrap: wrap;
     text-align: center;
-
+    font-size: 1.5rem;
     margin: 2rem auto 0.5rem;
     padding: 0.7rem;
 
@@ -124,33 +120,9 @@ h4 {
 
 
 
-
-/* Botón ENVIAR tarea */
-#sending {
-    align-self: center;
-    color: rgb(145, 145, 144);
-    margin-top: 5rem;
-    margin-right: 1.5rem;
-    padding: 1.2rem 3rem;
-    border-style: none;
-    border-radius: 50px;
-    background: linear-gradient(145deg, #EFEFBB, #D4D3DD);
-    box-shadow: -20px 20px 30px #cfc4ab,
-        20px -20px 40px #ffffe7;
-
-    margin-top: 2rem;
-
-}
-
-#sending:hover {
-    background: rgba(210, 238, 134, 0.534);
-
-}
-
-
-/* Botón ORDENAR */
-
-#btn__sortList {
+/* Botón ORDENAR  y MOSTRAS TODAS LAS TAREAS */
+#btn__sortList,
+#btn__ShowList {
     justify-content: center;
     margin-top: 5rem;
     margin-left: 1.5rem;
@@ -160,10 +132,8 @@ h4 {
     box-shadow: -20px 20px 30px #cfc4ab,
         20px -20px 40px #ffffe7;
     color: rgba(148, 144, 130, 0.995);
-
+    font-size: 1.5rem;
     padding: 1.2rem 2.5rem;
-
-
 
 }
 
@@ -171,11 +141,13 @@ h4 {
     background: rgb(215, 244, 247);
 }
 
+#btn__ShowList:hover {
+    background: rgb(205, 241, 156);
+}
 
 .myOrderedTask {
     font-family: Verdana, Geneva, Tahoma, sans-serif
 }
-
 
 
 ol {
@@ -225,9 +197,9 @@ ol li:nth-child(7) {
     margin-top: 2rem;
     margin-bottom: 3rem;
     padding-bottom: 2rem;
+
+    word-break: break-all;
 }
-
-
 
 #backgroundTaskList0 {
     margin-top: 2rem;
@@ -240,11 +212,12 @@ ol li:nth-child(7) {
     display: flex;
     flex-direction: column;
     width: 45%;
+    overflow: hidden;
     border-radius: 5px;
     font-size: 0.5rem;
     margin-top: 2rem;
     background: rgba(0, 255, 221, 0.413);
-
+    flex-wrap: wrap;
     background: linear-gradient(225deg, #ccdd48, #eefa90);
     box-shadow: -19px 19px 38px #c4ca91,
         19px -19px 38px #ffffc4;
@@ -283,8 +256,42 @@ ol li:nth-child(7) {
     padding-bottom: 2rem;
 }
 
+
+/* Todas las tareas */
+#backgroundTaskList5 {
+    background-color: #a9e292;
+    border-radius: 5px;
+    margin-top: 2rem;
+    width: 45%;
+    background: #a3e9f5;
+    box-shadow: 10px 10px 60px #8bd0cb,
+        -10px -10px 60px #bbecff;
+    padding-bottom: 2rem;
+}
+
+#backgroundTaskList5 ol li:first-child {
+    font-size: 1.6rem;
+    color: #61a4e2;
+}
+
+#backgroundTaskList5 ol li:nth-child(2) {
+    font-size: 1.4rem;
+    color: rgb(114, 140, 158);
+}
+
+#backgroundTaskList5 ol li:nth-child(3) {
+    font-size: 1.3rem;
+    color: rgb(110, 155, 140);
+}
+
+#backgroundTaskList5 ol li:nth-child(4) {
+    font-size: 1rem;
+    color: rgb(61, 99, 86);
+}
+
+/* Títulos de Post-it */
 .einsTitles {
-    font-size: 1.5rem;
+    font-size: 2rem;
     padding-right: 0.5rem;
 
 }
@@ -311,4 +318,8 @@ ol button {
 ol button:hover {
     background-color: rgba(123, 245, 204, 0.563);
 
+}
+
+ol li {
+    word-wrap: break-word;
 }

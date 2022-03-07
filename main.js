@@ -14,7 +14,7 @@ let ordList4;
 
 
 /* Escondo y hago aparecer los h1 y h3 */
-/* $("h1, h3").hide();
+$("h1, h3").hide();
 
 $("h1").fadeIn(2000, function () {
     $("h3").slideDown(500)
@@ -23,7 +23,6 @@ $("h1").fadeIn(2000, function () {
             "font-size": "3.5rem"
         })
 });
- */
 /* Obtengo los inputs y botones del dom */
 const mainTaskList = $("#main__addTaskAndList");
 
@@ -48,10 +47,8 @@ mainTaskList.append(`<form id = "my-Form">
 <input type="text" placeholder="Ingresa tu tarea aquí" class="input-enterTask">
 <select class = "myPriorityLevels"> </select>
 <select class = "myEisenhowerChoices"></select>
-<button type= "button" id="btn__sortList">Ordenar
-
-</button>
-<button id="ShowAllTasks">Mostrar todas las tareas</button>
+<button type= "button" id="btn__sortList">Ordenar</button>
+<button id="btn__ShowList">Mostrar todas las tareas</button>
 </form>`);
 const myForm = document.getElementById("my-Form");
 
@@ -96,7 +93,7 @@ obtainTaskName.addEventListener("change", (e) => {
 
 /* Obtengo el nivel de prioridad de SELECT */
 obtainEachPriority.addEventListener("change", (event) => {
-    console.log(priorityLevelForTask = Number(event.target.value));
+    priorityLevelForTask = Number(event.target.value);
 
 
 })
@@ -134,6 +131,7 @@ for (let [index, eachEisen] of eisenhowerChoices.entries()) {
 //****-------------------------------
 
 
+
 //****ANIMACIÓN---------------------------------------------------------
 // Inicio sin los h2 de los "post-it"**/
 $("h2").fadeOut();
@@ -150,7 +148,7 @@ $("h2").fadeOut();
 let myNewNameKeyWithCounter;
 let counter = 1;
 btnSort.addEventListener("click", (e) => {
-
+    document.querySelector('#taskItemsAllTasks').innerHTML = " ";
     /* Se debe seleccionar UNA OPCIÓN VÁLIDA de valores en cada select */
     if (taskName == undefined || priorityLevelForTask == undefined || priorityEisenhowerForTask == undefined) {
         alert("debe ingresar una tarea o seleccionar");
@@ -162,21 +160,18 @@ btnSort.addEventListener("click", (e) => {
         for (var i = 0; i < myArray.length; i++) {
 
             if (myArray[i].name === nameKey) {
-                alert(`tarea ${nameKey} repetida`);
+                alert(`tarea ${nameKey} repetida, se añadirá un índice`);
                 myArray[i].name = `${nameKey}${counter++}`;
                 myNewNameKeyWithCounter = `${nameKey}${counter++}`;
-
-                console.log(myNewNameKeyWithCounter)
             }
 
             if (myArray[i].name !== `${nameKey}${counter++}`) {
-                console.log("no se repite");
                 counter = 1;
             }
         }
     }
 
-    const resultObject = search(taskName, containerTasks);
+    search(taskName, containerTasks);
     //****-------------------------------
 
 
@@ -249,6 +244,8 @@ btnSort.addEventListener("click", (e) => {
     document.querySelector('#taskItems2').innerHTML = " ";
     document.querySelector('#taskItems3').innerHTML = " ";
     document.querySelector('#taskItems4').innerHTML = " ";
+    /* document.querySelector('#taskItemsAllTasks').innerHTML = " "; */
+
     //**---------------------------
 
 
@@ -281,6 +278,8 @@ btnSort.addEventListener("click", (e) => {
                     const mY = e.target.id
                     /* Ejecuto la función Remove Item, le paso por parámetro el Id del target*/
                     removeItem(mY);
+                    /* Borra la lista de todas las tareas*/
+                    document.querySelector('#taskItemsAllTasks').innerHTML = " "
 
 
                     let eachliId = document.getElementById(`${filter1.name}`)
@@ -290,11 +289,7 @@ btnSort.addEventListener("click", (e) => {
 
                         eachliId.remove(eachliId.id);
                         btnDelete.remove(btnDelete.id);
-                        console.log("borrado");
-                        console.log(containerTasks)
                     }
-
-                    console.log(containerTasks)
 
                 }
             })
@@ -304,11 +299,10 @@ btnSort.addEventListener("click", (e) => {
 
         //**FILTER 2------------------------------------------------------
         for (let filter2 of f2) {
-
             let divEisen2 = document.querySelector("#backgroundTaskList2");
-            console.log(ordList2 = document.querySelector(`#taskItems2`))
+            ordList2 = document.querySelector(`#taskItems2`);
             itemList2 = document.createElement("li");
-            itemList2.setAttribute("id", `${filter2.name}`)
+            itemList2.setAttribute("id", `${filter2.name}`);
 
             /* Botón Delete */
             let btnDelete2 = document.createElement("button");
@@ -328,16 +322,15 @@ btnSort.addEventListener("click", (e) => {
                 if (e.target && e.target.classList.contains("btn_delete2")) {
                     const mY2 = e.target.id
                     removeItem(mY2);
+
+                    document.querySelector('#taskItemsAllTasks').innerHTML = " "
+
                     let eachliId2 = document.getElementById(`${filter2.name}`)
-
-
                     /* Si el id del LI coincide con el id del botón, BORRARR ITEM LIST Y SU BOTÓN. */
                     if (eachliId2.id == e.target.id && btnDelete2.id == e.target.id) {
-
                         eachliId2.remove(eachliId2.id);
                         btnDelete2.remove(btnDelete2.id);
-                        console.log("borrado");
-                        console.log(containerTasks)
+
                     }
 
 
@@ -352,16 +345,15 @@ btnSort.addEventListener("click", (e) => {
 
         //**FILTER 3-------------------------------------------------------
         for (let filter3 of f3) {
-
             let divEisen3 = document.querySelector("#backgroundTaskList3");
-            console.log(ordList3 = document.querySelector(`#taskItems3`))
+            ordList3 = document.querySelector(`#taskItems3`);
             itemList3 = document.createElement("li");
-            itemList3.setAttribute("id", `${filter3.name}`)
+            itemList3.setAttribute("id", `${filter3.name}`);
 
             /* Botón Delete */
             let btnDelete3 = document.createElement("button");
-            btnDelete3.setAttribute("class", "btn_delete3")
-            btnDelete3.setAttribute("id", `${filter3.name}`)
+            btnDelete3.setAttribute("class", "btn_delete3");
+            btnDelete3.setAttribute("id", `${filter3.name}`);
 
 
             divEisen3.append(ordList3);
@@ -372,23 +364,20 @@ btnSort.addEventListener("click", (e) => {
 
             /* clicks en lista */
             divEisen3.addEventListener("click", (e) => {
-
-
                 if (e.target && e.target.classList.contains("btn_delete3")) {
                     const mY3 = e.target.id
                     removeItem(mY3);
-                    /* console.log(mY) */
+                    document.querySelector('#taskItemsAllTasks').innerHTML = " "
+
 
                     let eachliId3 = document.getElementById(`${filter3.name}`)
-                    /* console.log(eachliId.id) */
+
 
                     /* Si el id del LI coincide con el id del botón, borrar el item list y su botón. */
                     if (eachliId3.id == e.target.id && btnDelete3.id == e.target.id) {
 
                         eachliId3.remove(eachliId3.id);
                         btnDelete3.remove(btnDelete3.id);
-                        console.log("borrado");
-                        console.log(containerTasks)
                     }
 
 
@@ -426,18 +415,17 @@ btnSort.addEventListener("click", (e) => {
                 if (e.target && e.target.classList.contains("btn_delete4")) {
                     const mY4 = e.target.id
                     removeItem(mY4);
-                    /* console.log(mY) */
+                    document.querySelector('#taskItemsAllTasks').innerHTML = " "
+
 
                     let eachliId4 = document.getElementById(`${filter4.name}`)
-                    /* console.log(eachliId.id) */
+
 
                     /* Si el id del LI coincide con el id del botón, borrar el item list y su botón. */
                     if (eachliId4.id == e.target.id && btnDelete4.id == e.target.id) {
 
                         eachliId4.remove(eachliId4.id);
                         btnDelete4.remove(btnDelete4.id);
-                        console.log("borrado");
-                        console.log(containerTasks)
                     }
 
 
@@ -463,27 +451,46 @@ btnSort.addEventListener("click", (e) => {
         for (let i = 0; i < containerTasks.length; i++) {
 
             if (containerTasks[i].name == myName) {
-                console.log(containerTasks[i].name)
-
+                containerTasks[i].name
                 containerTasks.splice(i, 1);
-
-                /*  console.log(containerTasks); */
-                console.log(myName)
-
             }
 
         }
     }
     //**-------------------------
+})
+
+//** Mostrar todas las tareas-------------------------------------------
+let sqareDivAllTasks = document.createElement("div");
+let sqareTitleAllTasks = document.createElement("h2");
+let ordListAllTasks = document.createElement("ol");
 
 
-    /* Mostrar todas las tareas */
+
+let itemListAllTasks = document.createElement("li");
+einsSection.append(sqareDivAllTasks);
+sqareDivAllTasks.append(sqareTitleAllTasks);
+sqareDivAllTasks.append(ordListAllTasks);
 
 
+sqareDivAllTasks.setAttribute('id', "backgroundTaskList5");
+ordListAllTasks.setAttribute("id", "taskItemsAllTasks");
+
+const showAllTasks = document.getElementById("btn__ShowList");
+showAllTasks.addEventListener("click", (e) => {
+    e.preventDefault()
+
+    for (let allTasks of containerTasks) {
+
+        let itemListAllTasks = document.createElement("li");
+        itemListAllTasks.setAttribute("id", `${allTasks.name}`);
+        ordListAllTasks.append(itemListAllTasks);
 
 
-
-
-
+        /* Título */
+        sqareTitleAllTasks.innerHTML = "Todas las tareas";
+        /* Lista de tareas */
+        itemListAllTasks.innerHTML = ` ${allTasks.name}`;
+    }
 
 })
