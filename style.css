@@ -192,21 +192,24 @@ ol li {
 }
 
 ol li:first-child {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     color: #61a4e2;
 }
 
-ol li:nth-child(2) {
-    font-size: 1.2rem;
-    color: rgb(149, 204, 240);
-}
-
 ol li:nth-child(3) {
-    font-size: 1.1rem;
-    color: rgb(176, 220, 237);
+    font-size: 1.4rem;
+    color: rgb(114, 140, 158);
 }
 
+ol li:nth-child(5) {
+    font-size: 1.3rem;
+    color: rgb(110, 155, 140);
+}
 
+ol li:nth-child(7) {
+    font-size: 1rem;
+    color: rgb(61, 99, 86);
+}
 
 
 
@@ -234,6 +237,8 @@ ol li:nth-child(3) {
 }
 
 #backgroundTaskList1 {
+    display: flex;
+    flex-direction: column;
     width: 45%;
     border-radius: 5px;
     font-size: 0.5rem;
@@ -268,18 +273,42 @@ ol li:nth-child(3) {
 }
 
 #backgroundTaskList4 {
-    background-color: #c467e2;
+    background-color: #ce92e2;
     border-radius: 5px;
     margin-top: 2rem;
     width: 45%;
-    background: linear-gradient(225deg, #cc90f3cd, #d77ff1a5);
-    box-shadow: -19px 19px 38px #9e64cd41,
-        19px -19px 38px #c898f05d;
+    background: #f5a3f2;
+    box-shadow:  20px 20px 60px #d08bce,
+                 -20px -20px 60px #ffbbff;
     padding-bottom: 2rem;
 }
 
 .einsTitles {
     font-size: 1.5rem;
     padding-right: 0.5rem;
+
+}
+
+ol button{
+    border-radius: 50px;
+    width:5rem;
+    margin-top: 0.3rem;
+    margin-bottom: 0.4rem;
+    background: url("/trashcan.png") no-repeat center ;
+    background-size: 30%;
+    border-style: none;
+    
+    box-shadow: -10px 10px 40px #cfc4ab,
+        10px -10px 40px #ffffe7;
+    color: rgba(148, 144, 130, 0.995);
+
+    padding: 1.2rem;
+    
+    margin-left: 6rem;
+}
+
+
+ol button:hover{
+background-color:rgba(123, 245, 204, 0.563);
 
 }
