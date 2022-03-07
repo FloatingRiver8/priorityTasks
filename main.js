@@ -38,9 +38,6 @@ class Tasks {
     }
 }
 
-
-
-
 //---------------------------------------------------------
 
 
@@ -108,19 +105,16 @@ obtainEachEisenhower.addEventListener("change", (e) => {
     priorityEisenhowerForTask = (e.target.value);
 })
 
-
-
-let divEisen = document.querySelector("#backgroundTaskList1");
+//**POSTIT**---------------------------------------------------------
+/* CREO SECCIÓN para los "POST-IT" de Eisenhower" */
 let sqareDiv
 
-//---------------------------------------------------------
-/* CREO SECCIÓN para los "POST-IT" de Eisenhower" */
+
 einsSection = document.createElement("section");
 einsSection.setAttribute('id', 'einsSection')
 
 /* Creo CADA "POST-IT" */
 for (let [index, eachEisen] of eisenhowerChoices.entries()) {
-
 
     sqareDiv = document.createElement("div");
     sqareTitle = document.createElement("h2");
@@ -136,30 +130,34 @@ for (let [index, eachEisen] of eisenhowerChoices.entries()) {
     sqareDiv.setAttribute('id', `backgroundTaskList${index}`);
     sqareTitle.innerHTML = eachEisen;
 
-
-
 }
+//****-------------------------------
 
-//---------------------------------------------------------
 
-/* ANIMACIÓN Inicio sin los h2 de los "post-it" */
+//****ANIMACIÓN---------------------------------------------------------
+// Inicio sin los h2 de los "post-it"**/
 $("h2").fadeOut();
-//---------------------------------------------------------
+//**------------------------------
+
+
+
+
+
+
+//****BOTÓN ORDENAR evento-----------------------------------------------
+/*  Ordena las tareas por orden de prioridad  */
 
 let myNewNameKeyWithCounter;
 let counter = 1;
-
-/* **BOTÓN ORDENAR evento**
- Ordena las tareas por orden de prioridad */
 btnSort.addEventListener("click", (e) => {
 
-    /* Se debe seleccionar una opción válida de valores en cada select */
+    /* Se debe seleccionar UNA OPCIÓN VÁLIDA de valores en cada select */
     if (taskName == undefined || priorityLevelForTask == undefined || priorityEisenhowerForTask == undefined) {
         alert("debe ingresar una tarea o seleccionar");
         return
     }
 
-    /* Si se repite el nombre de una tarea, se le agrega un número con un contador */
+    /* Si se REPITE NOMBRE de una tarea, se le agrega un número con un contador */
     function search(nameKey, myArray) {
         for (var i = 0; i < myArray.length; i++) {
 
@@ -175,39 +173,25 @@ btnSort.addEventListener("click", (e) => {
                 console.log("no se repite");
                 counter = 1;
             }
-
-
         }
-
-
-
     }
 
+    const resultObject = search(taskName, containerTasks);
+    //****-------------------------------
 
 
 
-
-
-
-    var resultObject = search(taskName, containerTasks);
-
-
-
-
+    //***INSTANCIACIÓN---------------------------------------------------------
     /* Creo la instancia del objeto Task y borro el input  */
     containerTasks.push(new Tasks(taskName, priorityLevelForTask, priorityEisenhowerForTask));
     /* Borro el ingreso de la tarea del input */
     obtainTaskName.value = "";
+    //****-------------------------------
 
 
 
-
-
-
-
-
-    //---------------------------------------------------------    
-    /* ORDENO las tareas dependiendo del PRIORITYNUMBER donde 10 va primero que 1 */
+    //**ORDENO PRIORITY---------------------------------------------------------   
+    /*  las tareas se ordenan dependiendo del PRIORITYNUMBER donde 10 va primero que 1 */
     for (let i = 1; i <= containerTasks.length; i += 1) {
 
         if (i == containerTasks.length) {
@@ -221,20 +205,25 @@ btnSort.addEventListener("click", (e) => {
             })
         }
     }
-    //---------------------------------------------------------
+    //**-------------------------
 
 
-    /* Una vez click en ordenar, APARECEN los TÍTULOS de los POST-IT */
+
+
+    //**ANIMACIÓN---------------------------------------------------------
+    /*  Una vez click en ordenar, APARECEN los TÍTULOS de los POST-IT  */
 
     $("h2").fadeIn("slow")
         .slideDown(2000);
+    //**---------------------------
 
 
-    //---------------------------------------------------------            
-    /* FILTRA los resultados de las tareas que contengan "Importante/No urgente" */
+
+
+    //** FILTRA Por EISENHOWER--------------------------------------------
+    /* Ordena las tareas según categoria Eisenhower */
     filtered1 = containerTasks.filter(function (element) {
         return element.priorityEisenhower == "Importante/Urgente";
-
     });
 
 
@@ -249,24 +238,28 @@ btnSort.addEventListener("click", (e) => {
 
     const filtered4 = containerTasks.filter(function (element) {
         return element.priorityEisenhower == "No importante/No urgente";
-
     });
+    //**---------------------------
 
-    //---------------------------------------------------------
 
-    /* Vaciar las listas para que no se repitan los items añadidos anteriormente */
+
+    //** VACIAR LAS LISTAS-----------------------------------------------------
+    /* Para que no se repitan los items añadidos anteriormente */
     document.querySelector('#taskItems1').innerHTML = " ";
     document.querySelector('#taskItems2').innerHTML = " ";
     document.querySelector('#taskItems3').innerHTML = " ";
     document.querySelector('#taskItems4').innerHTML = " ";
+    //**---------------------------
 
-    /* LISTAR tareas en post-it DEPENDIENDO del FILTRO */
+
+    //**LISTAR----------------------------------------------------------------
+    /* Ubica las tareas en post-it DEPENDIENDO del FILTRO */
 
     function filtering(f1, f2, f3, f4) {
 
-
+        //**FILTER 1-------------------------------------------------------
         for (let filter1 of f1) {
-
+            /* Creo los elementos y guardo en variable */
             let divEisen = document.querySelector("#backgroundTaskList1");
             ordList1 = document.querySelector(`#taskItems1`)
             itemList1 = document.createElement("li");
@@ -275,17 +268,18 @@ btnSort.addEventListener("click", (e) => {
             let btnDelete = document.createElement("button");
             btnDelete.setAttribute("class", "btn_delete1")
             btnDelete.setAttribute("id", `${filter1.name}`)
-
+            /* Agrego cada elemento */
             divEisen.append(ordList1);
             ordList1.append(itemList1);
             ordList1.append(btnDelete);
             itemList1.innerHTML = ` ${filter1.name}`;
 
-            /* clicks en lista */
+            /* Escucho los clicks en lista */
             divEisen.addEventListener("click", (e) => {
 
                 if (e.target && e.target.classList.contains("btn_delete1")) {
                     const mY = e.target.id
+                    /* Ejecuto la función Remove Item, le paso por parámetro el Id del target*/
                     removeItem(mY);
 
 
@@ -305,7 +299,10 @@ btnSort.addEventListener("click", (e) => {
                 }
             })
         }
+        //****-------------------------------
 
+
+        //**FILTER 2------------------------------------------------------
         for (let filter2 of f2) {
 
             let divEisen2 = document.querySelector("#backgroundTaskList2");
@@ -324,7 +321,6 @@ btnSort.addEventListener("click", (e) => {
 
             itemList2.innerHTML = ` ${filter2.name}`;
 
-
             /* clicks en lista */
             divEisen2.addEventListener("click", (e) => {
 
@@ -333,7 +329,7 @@ btnSort.addEventListener("click", (e) => {
                     const mY2 = e.target.id
                     removeItem(mY2);
                     let eachliId2 = document.getElementById(`${filter2.name}`)
-                    /* console.log(eachliId.id) */
+
 
                     /* Si el id del LI coincide con el id del botón, BORRARR ITEM LIST Y SU BOTÓN. */
                     if (eachliId2.id == e.target.id && btnDelete2.id == e.target.id) {
@@ -347,12 +343,14 @@ btnSort.addEventListener("click", (e) => {
 
                 }
 
-
-
             })
         }
 
+        //****-------------------------------
 
+
+
+        //**FILTER 3-------------------------------------------------------
         for (let filter3 of f3) {
 
             let divEisen3 = document.querySelector("#backgroundTaskList3");
@@ -399,12 +397,11 @@ btnSort.addEventListener("click", (e) => {
 
             })
 
-
-
-
         }
 
+        //****-------------------------------
 
+        //**FILTER 4-------------------------------------------------------
         for (let filter4 of f4) {
             let divEisen4 = document.querySelector("#backgroundTaskList4");
             ordList4 = document.querySelector(`#taskItems4`)
@@ -420,8 +417,6 @@ btnSort.addEventListener("click", (e) => {
             ordList4.append(itemList4);
             ordList4.append(btnDelete4);
             itemList4.innerHTML = ` ${filter4.name}`;
-
-
 
 
             /* clicks en lista */
@@ -459,11 +454,11 @@ btnSort.addEventListener("click", (e) => {
 
     filtering(filtered1, filtered2, filtered3, filtered4);
 
+    //****-------------------------------
 
 
 
-    //---------------------------------------------------------
-    /* Borrar Item de la lista */
+    //** Borrar Item de la lista---------------------------------------
     function removeItem(myName) {
         for (let i = 0; i < containerTasks.length; i++) {
 
@@ -477,14 +472,9 @@ btnSort.addEventListener("click", (e) => {
 
             }
 
-
-
-
         }
-
-
-
     }
+    //**-------------------------
 
 
     /* Mostrar todas las tareas */

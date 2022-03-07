@@ -278,8 +278,8 @@ ol li:nth-child(7) {
     margin-top: 2rem;
     width: 45%;
     background: #f5a3f2;
-    box-shadow:  20px 20px 60px #d08bce,
-                 -20px -20px 60px #ffbbff;
+    box-shadow: 10px 10px 60px #d08bce,
+        -10px -10px 60px #ffbbff;
     padding-bottom: 2rem;
 }
 
@@ -289,26 +289,26 @@ ol li:nth-child(7) {
 
 }
 
-ol button{
+ol button {
     border-radius: 50px;
-    width:5rem;
+    width: 5rem;
     margin-top: 0.3rem;
     margin-bottom: 0.4rem;
-    background: url("/trashcan.png") no-repeat center ;
+    background: url("/trashcan.png") no-repeat center;
     background-size: 30%;
     border-style: none;
-    
-    box-shadow: -10px 10px 40px #cfc4ab,
-        10px -10px 40px #ffffe7;
+
+    box-shadow: -10px 10px 55px #cfc4ab,
+        10px -10px 55px #ffffe7;
     color: rgba(148, 144, 130, 0.995);
 
     padding: 1.2rem;
-    
+
     margin-left: 6rem;
 }
 
 
-ol button:hover{
-background-color:rgba(123, 245, 204, 0.563);
+ol button:hover {
+    background-color: rgba(123, 245, 204, 0.563);
 
 }
