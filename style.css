@@ -301,7 +301,7 @@ ol button {
     width: 5rem;
     margin-top: 0.3rem;
     margin-bottom: 0.4rem;
-    background: url("/trashcan.png") no-repeat center;
+    background: url("./trashcan.png") no-repeat center;
     background-size: 30%;
     border-style: none;
 
